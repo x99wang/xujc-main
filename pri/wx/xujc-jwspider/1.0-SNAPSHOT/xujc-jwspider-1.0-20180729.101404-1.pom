@@ -100,6 +100,10 @@
                 </configuration>
             </plugin>
             <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
+            <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.12</version>
@@ -121,7 +125,7 @@
                         <goals>
                             <goal>site</goal>
                         </goals>
-                        <phase>deploy</phase>
+                        <phase>site-deploy</phase>
                     </execution>
                 </executions>
             </plugin>
