@@ -1,13 +1,18 @@
 package pri.wx.jwcrawler.method;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import pri.wx.jwcrawler.enums.JsonParms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static pri.wx.jwcrawler.enums.JsonParms.*;
 
 class JwParse {
 
@@ -119,6 +124,54 @@ class JwParse {
             }
         }
         return apikey;
+    }
+
+    /**
+     * 抓取出勤信息
+     * @param kq_str 考勤页面
+     * @return Attendance Record
+     */
+    static String getAttendanceRecord(String kq_str) {
+        List<Map<String,String>> maps = new ArrayList<>();
+
+        Document doc = Jsoup.parse(kq_str);
+        Element inf = doc.body().getElementById("wrap").
+                getElementById("main").getElementById("m_ext").
+                getElementById("main2").getElementById("content").
+                select("table").first().
+                select("tbody").first();
+        for (Element e : inf.select("tr")) {
+            Map<String,String> map = new HashMap<>();
+            Element node = e.select("td").first();
+            if (node.text().length() == 1 && Integer.parseInt(node.text()) > 0) {
+                node = node.nextElementSibling();
+                map.put(TM_ID.value(), node.text());
+
+                node = node.nextElementSibling();
+                map.put(KCB_MC.value(), node.text());
+
+                node = node.nextElementSibling();
+                map.put(KCB_RKJS.value(), node.text());
+
+                node = node.nextElementSibling();
+                map.put(WEEK.value(), node.text());
+
+                node = node.nextElementSibling();
+                map.put(DAY_WEEK.value(), node.text());
+
+                node = node.nextElementSibling();
+                map.put(DATE.value(), node.text());
+
+                node = node.nextElementSibling();
+                map.put(TYPE.value(), node.text());
+
+                node = node.nextElementSibling();
+                map.put(HOUR.value(), node.text());
+
+                maps.add(map);
+            }
+        }
+        return new JSONArray(maps).toString();
     }
 
 }

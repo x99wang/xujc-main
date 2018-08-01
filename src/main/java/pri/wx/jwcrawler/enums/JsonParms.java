@@ -65,7 +65,7 @@ public enum JsonParms {
     KCB_SKSD("kcb_sksd"),
     TM_MC("tm_mc"),
 
-    ;
+    KCB_RKJS("kcb_rkjs"), WEEK("week"), DAY_WEEK("day_week"), DATE("date"), TYPE("type"), HOUR("hour");
 
     private String value;
 

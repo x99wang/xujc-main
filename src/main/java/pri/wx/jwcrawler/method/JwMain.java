@@ -30,27 +30,27 @@ import static pri.wx.jwcrawler.enums.UrlEnum.*;
 import static pri.wx.jwcrawler.response.ErrorCode.*;
 
 /**
- * 教务操作类<br/>
+ * 教务操作类<br>
  * 其中返回的错误信息定义在
  * @see ErrorCode
  *
- * <br/>
+ * <br>
  * 方法：
- * <br/>1、根据<b>学号</b>、<b>密码</b>登陆并且获取apikey
+ * <br>1、根据<b>学号</b>、<b>密码</b>登陆并且获取apikey
  * @see #login(String, String)
- * <br/>2、个人信息页面获取学号、姓名、年级、专业、宿舍
+ * <br>2、个人信息页面获取学号、姓名、年级、专业、宿舍
  * @see #oneInfo()
- * <br/>3、个人学期列表
+ * <br>3、个人学期列表
  * @see #apiTerms(String)
- * <br/>4、课程列表
+ * <br>4、课程列表
  * @see #apiCourses(String, String)
- * <br/>5、课程上课信息列表
+ * <br>5、课程上课信息列表
  * @see #apiClasses(String, String)
- * <br/>6、当前考试安排
+ * <br>6、当前考试安排
  * @see #apiTerms(String)
- * <br/>7、成绩信息
+ * <br>7、成绩信息
  * @see #apiScores(String, String)
- * <br/>8、综合测评
+ * <br>8、综合测评
  * @see #apiZhcp(String)
  *
  * @author wx
@@ -160,6 +160,11 @@ public class JwMain {
         return response.getBody();
     }
 
+    /**
+     * Get one's information
+     * about name,grade,dorm,stuNo
+     * @return info
+     */
     public static RestResponse<JSONObject> oneInfo() {
         long startTime = System.currentTimeMillis();
 
@@ -176,6 +181,28 @@ public class JwMain {
             return new RestResponse<>("处理时间" + (endTime - startTime) + "ms", res);
         }
         return new RestResponse<>(ErrorCode.INFO_ERROR);
+    }
+
+    /**
+     * Get one's attendance record
+     * @return list of attendances
+     */
+    public static RestResponse<JSONArray> oneAtt() {
+        long startTime = System.currentTimeMillis();
+
+        RestResponse<MyResponse> mresponse = HttpUtil.doGet(JW_HOME,STU_ATT);
+
+        MyResponse att = mresponse.getResult();
+        if (att == null) {
+            return new RestResponse<>(ErrorCode.valueOf(mresponse.getCode()));
+        }
+        String attStr = JwParse.getAttendanceRecord(att.getBody());
+        if (null != attStr && !attStr.isEmpty()) {
+            JSONArray res = new JSONArray(attStr);
+            long endTime = System.currentTimeMillis();
+            return new RestResponse<>("处理时间" + (endTime - startTime) + "ms", res);
+        }
+        return new RestResponse<>(ErrorCode.ATT_ERROR);
     }
 
     /**

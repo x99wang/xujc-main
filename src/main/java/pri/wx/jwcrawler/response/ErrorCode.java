@@ -25,11 +25,10 @@ public enum ErrorCode implements ErrorCodeImp {
     DB_COURSE_WRONG("数据库获取课表错误"),
     DB_EXAM_WRONG("数据库获取考试安排错误"),
     DB_SCORE_WRONG("数据库获取成绩信息错误"),
-    DB_ZHCP_WRONG("数据库获取综合测评错误")
+    DB_ZHCP_WRONG("数据库获取综合测评错误"),
 
 
-
-    ;
+    ATT_ERROR("获取考勤信息错误");
 
 
 

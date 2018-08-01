@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Http连接池
  * @author PigPIgAutumn
- * @link https://www.jianshu.com/p/c852cbcf3d68
+ * <a href="https://www.jianshu.com/p/c852cbcf3d68">出处</a>
  */
 public class HttpConnectionPoolUtil {
 

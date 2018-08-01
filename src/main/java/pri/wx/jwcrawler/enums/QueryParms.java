@@ -7,6 +7,7 @@ public enum QueryParms {
 
     LOGIN("Login", "login"),
     STU_INF("Default", "inf"),
+    STU_ATT("Default", "kqMxb"),
     API_KEY("Client", "index"),
     MAKE_KEY("Client", "apply"),
     NULL(null, null),
