@@ -371,7 +371,7 @@ public class JwMain {
             }
             if (c.length() > 0) {
                 for (int j = 0; j < c.length(); j++)
-                    classes.put(c.getJSONObject(j));
+                    classes.put(c.getJSONObject(j).put("kc_mc",maps.getJSONObject(i).getString("kc_mc")));
             }
         }
         long endTime = System.currentTimeMillis();
