@@ -20,7 +20,7 @@ public class PropertyUtil {
     }
 
     synchronized static private void loadProps(){
-        logger.info("开始加载properties文件内容.......");
+        logger.info("开始设置properties文件内容.......");
         props = new Properties();
         props.setProperty("connectTimeout", "5000");
         props.setProperty("connectRequestTimeout", "5000");
@@ -33,34 +33,7 @@ public class PropertyUtil {
         props.setProperty("userAgentValue", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
         props.setProperty("authorizationKey", "Authorization");
         props.setProperty("encoding", "gb2312");
-        /*
-        InputStream in = null;
-        try {
-            //<!--第一种，通过类加载器进行获取properties文件流-->
-            // in = PropertyUtil.class.getClassLoader().getResourceAsStream(NAME_PROPER);
-            //<!--第二种，通过类进行获取properties文件流-->
-            //in = PropertyUtil.class.getResourceAsStream("/jdbc.properties");
-
-            // 获取文件流（方法1或2均可）
-//            InputStream inputStream = new BufferedInputStream(new FileInputStream(new File("src/main/resources/"+NAME_PROPER))); //方法1
-//            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties"); //方法2
-            in = ClassLoader.getSystemResourceAsStream(NAME_PROPER);
-            props.load(in);
-        } catch (FileNotFoundException e) {
-            logger.error(NAME_PROPER + "文件未找到");
-        } catch (IOException e) {
-            logger.error("出现IOException");
-        } finally {
-            try {
-                if(null != in) {
-                    in.close();
-                }
-            } catch (IOException e) {
-                logger.error(NAME_PROPER+"文件流关闭出现异常");
-            }
-        }
-        logger.info("加载properties文件内容完成...........");
-        */
+        logger.info("设置properties文件完成");
         logger.info("properties文件内容：" + props);
     }
 
