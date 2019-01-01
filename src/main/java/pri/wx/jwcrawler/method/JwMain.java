@@ -319,9 +319,17 @@ public class JwMain {
         }
 
         /* format of response must be right */
-        JSONArray maps = new JSONArray(response.getBody()
+        String body = response.getBody()
                 .replace("\n", "")
-                .replace("\r", ""));
+                .replace("\r", "");
+
+        logger.debug("Courses body:" + body);
+        JSONArray maps;
+        try {
+            maps = new JSONArray(body);
+        } catch (JSONException e) {
+            maps = new JSONArray();
+        }
 
         for (int i = 0; i < maps.length(); i++) {
             maps.getJSONObject(i).remove(JsonParms.KCB_SKSD.value());
@@ -349,11 +357,20 @@ public class JwMain {
         }
 
         /* format of response must be right */
-        JSONArray maps = new JSONArray(response.getBody()
+        String body = response.getBody()
                 .replace("\n", "")
-                .replace("\r", ""));
+                .replace("\r", "");
 
-        JSONArray classes = new JSONArray();
+        logger.debug("Classes body:" + body);
+        JSONArray maps;
+        JSONArray classes;
+        try {
+            maps = new JSONArray(body);
+            classes = new JSONArray();
+        } catch (JSONException e) {
+            maps = new JSONArray();
+            classes = new JSONArray();
+        }
         for (int i = 0; i < maps.length(); i++) {
             JSONArray c;
             try {
@@ -375,6 +392,7 @@ public class JwMain {
             }
         }
         long endTime = System.currentTimeMillis();
+
         return new RestResponse<>("处理时间" + (endTime - startTime) + "ms", classes);
     }
 
@@ -397,7 +415,17 @@ public class JwMain {
         }
 
         /* format of response must be right */
-        JSONObject map = new JSONObject(response.getBody());
+        String body = response.getBody()
+                .replace("\n", "")
+                .replace("\r", "");
+
+        logger.debug("Courses body:" + body);
+        JSONObject map;
+        try {
+            map = new JSONObject(response.getBody());
+        } catch (JSONException e) {
+            map = new JSONObject();
+        }
         JSONArray exams = new JSONArray();
         for (String key : map.keySet()) {
             JSONObject exam = map.getJSONObject(key);
@@ -428,7 +456,17 @@ public class JwMain {
         }
 
         /* format of response must be right */
-        JSONArray maps = new JSONArray(response.getBody());
+        String body = response.getBody()
+                .replace("\n", "")
+                .replace("\r", "");
+
+        logger.debug("Scores body:" + body);
+        JSONArray maps;
+        try {
+            maps = new JSONArray(response.getBody());
+        } catch (JSONException e) {
+            maps = new JSONArray();
+        }
         for (int i = 0; i < maps.length(); i++) {
             JSONObject m = maps.getJSONObject(i);
             m.put(JsonParms.XJ_ID.value(), apikey.split("-")[0]);
@@ -458,7 +496,17 @@ public class JwMain {
         }
 
         /* format of response must be right */
-        JSONArray maps = new JSONArray(response.getBody());
+        String body = response.getBody()
+                .replace("\n", "")
+                .replace("\r", "");
+
+        logger.debug("Evaluation body:" + body);
+        JSONArray maps;
+        try {
+            maps = new JSONArray(response.getBody());
+        } catch (JSONException e) {
+            maps = new JSONArray();
+        }
         for (int i = 0; i < maps.length(); i++) {
             JSONObject m = maps.getJSONObject(i);
             m.put(JsonParms.XJ_ID.value(), apikey.split("-")[0]);

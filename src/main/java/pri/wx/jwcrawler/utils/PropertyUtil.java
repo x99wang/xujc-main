@@ -13,7 +13,7 @@ import java.util.Properties;
  * @author hafiz.zhang
  */
 public class PropertyUtil {
-    private static final String NAME_PROPER = "http.properties";
+    private static final String NAME_PROPER = "src/http.properties";
     private static final Logger logger = LoggerFactory.getLogger(PropertyUtil.class);
     private static Properties props;
     static{
