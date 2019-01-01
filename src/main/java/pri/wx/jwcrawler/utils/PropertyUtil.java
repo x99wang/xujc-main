@@ -22,6 +22,18 @@ public class PropertyUtil {
     synchronized static private void loadProps(){
         logger.info("开始加载properties文件内容.......");
         props = new Properties();
+        props.setProperty("connectTimeout", "5000");
+        props.setProperty("connectRequestTimeout", "5000");
+        props.setProperty("socketTimeout", "10000");
+        props.setProperty("maxPoolSize", "10");
+        props.setProperty("idelTimeout", "1000");
+        props.setProperty("monitorInterval", "3000");
+        props.setProperty("contentTypeFormUrl", "application/x-www-form-urlencoded");
+        props.setProperty("userAgentKey", "User-Agent");
+        props.setProperty("userAgentValue", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
+        props.setProperty("authorizationKey", "Authorization");
+        props.setProperty("encoding", "gb2312");
+        /*
         InputStream in = null;
         try {
             //<!--第一种，通过类加载器进行获取properties文件流-->
@@ -48,6 +60,7 @@ public class PropertyUtil {
             }
         }
         logger.info("加载properties文件内容完成...........");
+        */
         logger.info("properties文件内容：" + props);
     }
 
