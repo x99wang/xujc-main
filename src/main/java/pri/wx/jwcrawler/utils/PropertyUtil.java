@@ -3,9 +3,7 @@ package pri.wx.jwcrawler.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -13,6 +11,7 @@ import java.util.Properties;
  * @author hafiz.zhang
  */
 public class PropertyUtil {
+    private static final String DEFAULT_ENCODING = "UTF-8";
     private static final String NAME_PROPER = "src/http.properties";
     private static final Logger logger = LoggerFactory.getLogger(PropertyUtil.class);
     private static Properties props;
@@ -26,10 +25,14 @@ public class PropertyUtil {
         InputStream in = null;
         try {
             //<!--第一种，通过类加载器进行获取properties文件流-->
-            in = PropertyUtil.class.getClassLoader().getResourceAsStream(NAME_PROPER);
+            // in = PropertyUtil.class.getClassLoader().getResourceAsStream(NAME_PROPER);
             //<!--第二种，通过类进行获取properties文件流-->
             //in = PropertyUtil.class.getResourceAsStream("/jdbc.properties");
-            props.load(in);
+
+            // 获取文件流（方法1或2均可）
+            InputStream inputStream = new BufferedInputStream(new FileInputStream(new File("src/main/resources/"+NAME_PROPER))); //方法1
+//            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties"); //方法2
+            props.load(new InputStreamReader(inputStream, DEFAULT_ENCODING));
         } catch (FileNotFoundException e) {
             logger.error(NAME_PROPER + "文件未找到");
         } catch (IOException e) {
