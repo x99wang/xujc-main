@@ -12,7 +12,7 @@ import java.util.Properties;
  */
 public class PropertyUtil {
     private static final String DEFAULT_ENCODING = "UTF-8";
-    private static final String NAME_PROPER = "src/http.properties";
+    private static final String NAME_PROPER = "http.properties";
     private static final Logger logger = LoggerFactory.getLogger(PropertyUtil.class);
     private static Properties props;
     static{
@@ -30,9 +30,10 @@ public class PropertyUtil {
             //in = PropertyUtil.class.getResourceAsStream("/jdbc.properties");
 
             // 获取文件流（方法1或2均可）
-            InputStream inputStream = new BufferedInputStream(new FileInputStream(new File("src/main/resources/"+NAME_PROPER))); //方法1
+//            InputStream inputStream = new BufferedInputStream(new FileInputStream(new File("src/main/resources/"+NAME_PROPER))); //方法1
 //            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("jdbc.properties"); //方法2
-            props.load(new InputStreamReader(inputStream, DEFAULT_ENCODING));
+            in = ClassLoader.getSystemResourceAsStream(NAME_PROPER);
+            props.load(in);
         } catch (FileNotFoundException e) {
             logger.error(NAME_PROPER + "文件未找到");
         } catch (IOException e) {
