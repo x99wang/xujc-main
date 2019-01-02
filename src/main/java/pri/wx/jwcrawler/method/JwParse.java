@@ -174,5 +174,64 @@ class JwParse {
         return new JSONArray(maps).toString();
     }
 
+    /**
+     * 抓取补课
+     * @param bk_str 补课页面
+     * @return Attendance Record
+     */
+    static String getRemediation(String bk_str) {
+        List<Map<String,String>> maps = new ArrayList<>();
+
+        Document doc = Jsoup.parse(bk_str);
+        Element inf = doc.body().getElementById("wrap").
+                getElementById("main").getElementById("m_ext").
+                getElementById("main2").getElementById("content");
+        Element tk = inf.select("table").first().
+                select("tbody").first();
+        Element bk = inf.select("table").
+                select("tbody").last();
+
+        Element[] tbk = new Element[]{tk,bk};
+        for(Element k :tbk){
+            for (Element e : k.select("tr")) {
+                Map<String,String> map = new HashMap<>();
+                Element node = e.select("td").first();
+                if (node.text().length() == 1 && Integer.parseInt(node.text()) > 0) {
+                    node = node.nextElementSibling();
+                    map.put(TBK_ID.value(), node.text());
+
+                    node = node.nextElementSibling();
+                    map.put(TBK_TYPE.value(), node.text());
+
+                    node = node.nextElementSibling();
+                    map.put(KCB_MC.value(), node.text());
+
+                    node = node.nextElementSibling();
+                    map.put(TBK_JS.value(), node.text());
+
+                    node = node.nextElementSibling();
+                    map.put(TBK_Z.value(), node.text());
+
+                    node = node.nextElementSibling();
+                    map.put(TBK_XQ.value(), node.text());
+
+                    node = node.nextElementSibling();
+                    map.put(TBK_JC.value(), node.text());
+
+                    node = node.nextElementSibling();
+                    map.put(TBK_DATE.value(), node.text());
+
+                    node = node.nextElementSibling();
+                    map.put(TBK_ROOM.value(), node.text());
+
+                    maps.add(map);
+                }
+            }
+        }
+        return new JSONArray(maps).toString();
+    }
+
+
+
 }
 

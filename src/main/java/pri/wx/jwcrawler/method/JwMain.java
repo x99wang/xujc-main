@@ -185,6 +185,7 @@ public class JwMain {
 
     /**
      * Get one's attendance record
+     * 考勤明细
      * @return list of attendances
      */
     public static RestResponse<JSONArray> oneAtt() {
@@ -197,6 +198,28 @@ public class JwMain {
             return new RestResponse<>(ErrorCode.valueOf(mresponse.getCode()));
         }
         String attStr = JwParse.getAttendanceRecord(att.getBody());
+        if (null != attStr && !attStr.isEmpty()) {
+            JSONArray res = new JSONArray(attStr);
+            long endTime = System.currentTimeMillis();
+            return new RestResponse<>("处理时间" + (endTime - startTime) + "ms", res);
+        }
+        return new RestResponse<>(ErrorCode.ATT_ERROR);
+    }
+
+    /**
+     * 调停补课
+     * @return list of attendances
+     */
+    public static RestResponse<JSONArray> oneTbk() {
+        long startTime = System.currentTimeMillis();
+
+        RestResponse<MyResponse> mresponse = HttpUtil.doGet(JW_HOME,STU_TBK);
+
+        MyResponse att = mresponse.getResult();
+        if (att == null) {
+            return new RestResponse<>(ErrorCode.valueOf(mresponse.getCode()));
+        }
+        String attStr = JwParse.getRemediation(att.getBody());
         if (null != attStr && !attStr.isEmpty()) {
             JSONArray res = new JSONArray(attStr);
             long endTime = System.currentTimeMillis();
@@ -469,7 +492,7 @@ public class JwMain {
         }
         for (int i = 0; i < maps.length(); i++) {
             JSONObject m = maps.getJSONObject(i);
-            m.put(JsonParms.XJ_ID.value(), apikey.split("-")[0]);
+            m.put(JsonParms.XJ_ID.value(), apikey.split("-")[0].toUpperCase());
             m.put(JsonParms.TM_ID.value(), tmId);
         }
         long endTime = System.currentTimeMillis();
@@ -509,7 +532,7 @@ public class JwMain {
         }
         for (int i = 0; i < maps.length(); i++) {
             JSONObject m = maps.getJSONObject(i);
-            m.put(JsonParms.XJ_ID.value(), apikey.split("-")[0]);
+            m.put(JsonParms.XJ_ID.value(), apikey.split("-")[0].toUpperCase());
             String tmId = m.getString(JsonParms.ZHCP_MC.value());
             /* 手动拼凑学期号 */
             tmId = "20" + tmId.split("-")[0] + tmId.split("-")[1].charAt(3);

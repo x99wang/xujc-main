@@ -28,7 +28,8 @@ public enum ErrorCode implements ErrorCodeImp {
     DB_ZHCP_WRONG("数据库获取综合测评错误"),
 
 
-    ATT_ERROR("获取考勤信息错误");
+    ATT_ERROR("获取考勤信息错误"),
+    TBK_ERROR("获取调补课信息错误");
 
 
 

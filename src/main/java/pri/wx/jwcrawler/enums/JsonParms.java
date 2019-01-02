@@ -39,6 +39,8 @@ public enum JsonParms {
     KCB_BZ("kcb_bz"),
     KC_MC("kc_mc"),
     KC_XF("kc_xf"),
+
+    /* 考试安排 */
     KSAP_KSRQ("ksap_ksrq"),
     KSAP_KSSD("ksap_kssd"),
     KSAP_KSSJ("ksap_kssj"),
@@ -52,6 +54,8 @@ public enum JsonParms {
     KCB_CLASS_ID ("kcb_class_id"),
     EXAM_DATE("exam_date"),
     EXAM_ROOM("exam_room"),
+
+    /* 综合测评 */
     ZHCP_MC("zhcp_mc"),
     BJ_MC("bj_mc"),
     BJ_U("bj_u"),
@@ -64,6 +68,17 @@ public enum JsonParms {
     ZHCP_PM("zhcp_pm"),
     KCB_SKSD("kcb_sksd"),
     TM_MC("tm_mc"),
+
+    /* 调补课 */
+    TBK_ID("tbk_id"),
+    TBK_TYPE("tbk_type"),
+    TBK_JS("kcb_rkjs"),
+    TBK_Z("tbk_z"),
+    TBK_XQ("sksd_xq"),
+    TBK_JC("tbk_jc"),
+    TBK_DATE("date"),
+    TBK_ROOM("room"),
+
 
     KCB_RKJS("kcb_rkjs"), WEEK("week"), DAY_WEEK("day_week"), DATE("date"), TYPE("type"), HOUR("hour");
 
