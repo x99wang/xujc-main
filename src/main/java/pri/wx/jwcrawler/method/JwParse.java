@@ -197,7 +197,7 @@ class JwParse {
                 Map<String,String> map = new HashMap<>();
                 Element node = e.select("td").first();
                 if (node.text().length() == 1 && Integer.parseInt(node.text()) > 0) {
-                    node = node.nextElementSibling();
+
                     map.put(TBK_ID.value(), node.text());
 
                     node = node.nextElementSibling();

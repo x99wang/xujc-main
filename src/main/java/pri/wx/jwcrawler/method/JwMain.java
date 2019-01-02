@@ -225,7 +225,7 @@ public class JwMain {
             long endTime = System.currentTimeMillis();
             return new RestResponse<>("处理时间" + (endTime - startTime) + "ms", res);
         }
-        return new RestResponse<>(ErrorCode.ATT_ERROR);
+        return new RestResponse<>(ErrorCode.TBK_ERROR);
     }
 
     /**
