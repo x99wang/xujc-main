@@ -231,7 +231,5 @@ class JwParse {
         return new JSONArray(maps).toString();
     }
 
-
-
 }
 

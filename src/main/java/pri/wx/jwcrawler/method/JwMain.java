@@ -445,7 +445,7 @@ public class JwMain {
         logger.debug("Courses body:" + body);
         JSONObject map;
         try {
-            map = new JSONObject(response.getBody());
+            map = new JSONObject(body);
         } catch (JSONException e) {
             map = new JSONObject();
         }
@@ -486,7 +486,7 @@ public class JwMain {
         logger.debug("Scores body:" + body);
         JSONArray maps;
         try {
-            maps = new JSONArray(response.getBody());
+            maps = new JSONArray(body);
         } catch (JSONException e) {
             maps = new JSONArray();
         }
@@ -526,7 +526,7 @@ public class JwMain {
         logger.debug("Evaluation body:" + body);
         JSONArray maps;
         try {
-            maps = new JSONArray(response.getBody());
+            maps = new JSONArray(body);
         } catch (JSONException e) {
             maps = new JSONArray();
         }
