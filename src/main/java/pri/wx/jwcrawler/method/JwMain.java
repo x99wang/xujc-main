@@ -443,18 +443,13 @@ public class JwMain {
                 .replace("\r", "");
 
         logger.debug("Courses body:" + body);
-        JSONObject map;
-        try {
-            map = new JSONObject(body);
-        } catch (JSONException e) {
-            map = new JSONObject();
-        }
         JSONArray exams = new JSONArray();
-        for (String key : map.keySet()) {
-            JSONObject exam = map.getJSONObject(key);
-            if (null != exam)
-                exams.put(exam);
+        try {
+            exams = new JSONArray(body);
+        } catch (JSONException e) {
+            exams = new JSONArray();
         }
+
         long endTime = System.currentTimeMillis();
         return new RestResponse<>("处理时间" + (endTime - startTime) + "ms", exams);
     }
