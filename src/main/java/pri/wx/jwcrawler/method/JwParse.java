@@ -198,7 +198,7 @@ class JwParse {
                 Element node = e.select("td").first();
                 if (node.text().length() == 1 && Integer.parseInt(node.text()) > 0) {
 
-                    map.put(TBK_ID.value(), node.text());
+                    // map.put(TBK_ID.value(), node.text());
 
                     node = node.nextElementSibling();
                     map.put(TBK_TYPE.value(), node.text());
